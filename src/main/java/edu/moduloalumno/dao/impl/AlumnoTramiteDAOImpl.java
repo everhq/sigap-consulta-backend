@@ -31,7 +31,7 @@ public class AlumnoTramiteDAOImpl implements IAlumnoTramiteDAO{
     
     @Override
     public List<AlumnoProgramaTramite> getAllAlumnoTramite(String codigo) {
-        String sql = "select apt.id_apt,apt.cod_alumno,apt.id_programa,apt.id_tipotramite,tt.desc_tipotramite,apb.id_apb,apt.n_expediente,apt.fecha_expediente from alumno_programa_tramite apt,alumno_programa_beneficio apb,tipo_tramite tt where apt.cod_alumno = (?) and (apt.id_tipotramite = tt.id_tipotramite) and (apt.id_apb = apb.id_apb)   order by apt.id_apt";
+        String sql = "select apt.id_apt,apt.cod_alumno,apt.id_tipotramite,tt.desc_tipotramite,apb.id_apb,apt.n_expediente,apt.fecha_expediente,apt.n_tramite,apt.anio_tramite,apt.fecha_emision,apt.usuario_emision,apt.n_oficio,apt.anio_oficio,apt.fecha_oficio,apt.importe_oficio,apt.importe_matricula_epg,apt.importe_otros,apt.importe_total from alumno_programa_tramite apt,alumno_programa_beneficio apb,tipo_tramite tt where apt.cod_alumno = (?) and (apt.id_tipotramite = tt.id_tipotramite) and (apt.id_apb = apb.id_apb)   order by apt.id_apt";
         RowMapper<AlumnoProgramaTramite> rowMapper = new AlumnoTramiteRowMapper();
 		return this.jdbcTemplate.query(sql, rowMapper, codigo);
     }
@@ -42,12 +42,12 @@ public class AlumnoTramiteDAOImpl implements IAlumnoTramiteDAO{
 		Integer ret = 0;
 		
 		if(aptramite.getToQuery()) {System.out.println("insert");
-			sql = "INSERT INTO alumno_programa_tramite(cod_alumno,id_programa,id_tipotramite,id_apb,n_expediente,fecha_expediente) values (?,?,?,?,?,?)";
-		 	ret = jdbcTemplate.update(sql, aptramite.getCod_alumno(),aptramite.getId_programa(),aptramite.getId_tipotramite(),aptramite.getId_apb(),aptramite.getN_expediente(),aptramite.getFecha_expediente());
+			sql = "INSERT INTO alumno_programa_tramite(cod_alumno,id_tipotramite,id_apb,n_expediente,fecha_expediente,n_tramite,anio_tramite,fecha_emision,usuario_emision,n_oficio,anio_oficio,fecha_oficio,importe_oficio,importe_matricula_epg,importe_otros,importe_total) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		 	ret = jdbcTemplate.update(sql, aptramite.getCod_alumno(),aptramite.getId_tipotramite(),aptramite.getId_apb(),aptramite.getN_expediente(),aptramite.getFecha_expediente(),aptramite.getN_tramite(),aptramite.getAnio_tramite(),aptramite.getFecha_emision(),aptramite.getUsuario_emision(),aptramite.getN_oficio(),aptramite.getAnio_oficio(),aptramite.getFecha_oficio(),aptramite.getImporte_oficio(),aptramite.getImporte_matricula_epg(),aptramite.getImporte_otros(),aptramite.getImporte_total());
 		}
 		else {System.out.println("update");
-			sql = "UPDATE alumno_programa_tramite SET id_programa = ?,id_tipotramite = ?,id_apb = ?,n_expediente = ?,fecha_expediente = ? where id_apt = ?";
-			ret = jdbcTemplate.update(sql,aptramite.getId_programa(),aptramite.getId_tipotramite(),aptramite.getId_apb(),aptramite.getN_expediente(),aptramite.getFecha_expediente(),aptramite.getId_apt());
+			sql = "UPDATE alumno_programa_tramite SET id_tipotramite = ?,id_apb = ?,n_expediente = ?,fecha_expediente = ?, n_tramite =?, anio_tramite = ?, fecha_emision =?,usuario_emision=?,n_oficio=?,anio_oficio=?,fecha_oficio=?,importe_oficio=?,importe_matricula_epg=?,importe_otros=?,importe_total=? where id_apt = ?";
+			ret = jdbcTemplate.update(sql,aptramite.getId_tipotramite(),aptramite.getId_apb(),aptramite.getN_expediente(),aptramite.getFecha_expediente(),aptramite.getN_tramite(),aptramite.getAnio_tramite(),aptramite.getFecha_emision(),aptramite.getUsuario_emision(),aptramite.getN_oficio(),aptramite.getAnio_oficio(),aptramite.getFecha_oficio(),aptramite.getImporte_oficio(),aptramite.getImporte_matricula_epg(),aptramite.getImporte_otros(),aptramite.getImporte_total(),aptramite.getId_apt());
 		}
 		System.out.println("respuesta sql "+ret);	
 		
