@@ -31,7 +31,7 @@ public class AlumnoTramiteDAOImpl implements IAlumnoTramiteDAO{
     
     @Override
     public List<AlumnoProgramaTramite> getAllAlumnoTramite(String codigo) {
-        String sql = "select apt.id_apt,apt.cod_alumno,apt.id_tipotramite,tt.desc_tipotramite,apb.id_apb,apt.n_expediente,apt.fecha_expediente,apt.n_tramite,apt.anio_tramite,apt.fecha_emision,apt.usuario_emision,apt.n_oficio,apt.anio_oficio,apt.fecha_oficio,apt.importe_oficio,apt.importe_matricula_epg,apt.importe_otros,apt.importe_total from alumno_programa_tramite apt,alumno_programa_beneficio apb,tipo_tramite tt where apt.cod_alumno = (?) and (apt.id_tipotramite = tt.id_tipotramite) and (apt.id_apb = apb.id_apb)   order by apt.id_apt";
+        String sql = "select apt.id_apt,apt.cod_alumno,apt.id_tipotramite,tt.desc_tipotramite,apb.id_apb,apt.n_expediente,apt.fecha_expediente,apb.beneficio_otorgado,apt.n_tramite,apt.anio_tramite,apt.fecha_emision,apt.usuario_emision,apt.n_oficio,apt.anio_oficio,apt.fecha_oficio,apt.importe_oficio,apt.importe_matricula_epg,apt.importe_otros,apt.importe_total from alumno_programa_tramite apt,alumno_programa_beneficio apb,tipo_tramite tt where apt.cod_alumno = (?) and (apt.id_tipotramite = tt.id_tipotramite) and (apt.id_apb = apb.id_apb)   order by apt.id_apt";
         RowMapper<AlumnoProgramaTramite> rowMapper = new AlumnoTramiteRowMapper();
 		return this.jdbcTemplate.query(sql, rowMapper, codigo);
     }

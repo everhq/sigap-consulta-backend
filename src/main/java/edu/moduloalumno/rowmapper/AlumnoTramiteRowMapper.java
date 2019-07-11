@@ -26,6 +26,7 @@ public class AlumnoTramiteRowMapper implements RowMapper<AlumnoProgramaTramite>{
                 ab.setId_apb(rs.getInt("id_apb"));
                 ab.setN_expediente(rs.getString("n_expediente"));
 		ab.setFecha_expediente(rs.getDate("fecha_expediente"));
+                ab.setBeneficio_otorgado(rs.getInt("beneficio_otorgado"));
                 ab.setDesc_tipotramite(rs.getString("desc_tipotramite"));
                 ab.setN_tramite(rs.getString("n_tramite"));
 		ab.setAnio_tramite(rs.getString("anio_tramite"));

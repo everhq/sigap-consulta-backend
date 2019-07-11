@@ -46,7 +46,7 @@ public class AlumnoBeneficioController {
 
 	@RequestMapping(value = "/listar/{codigo}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<AlumnoProgramaBeneficioCon>> getAllAlumnoBeneficio(@PathVariable("codigo") String codigo) {
-		logger.info(">> AlumnoBeneficio <<");
+		logger.info(">> AlumnoBeneficio <<"+codigo);
 
 		List<AlumnoProgramaBeneficioCon> list = null;
 		try {

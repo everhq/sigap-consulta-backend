@@ -38,6 +38,15 @@ public class AlumnoProgramaTramite {
     
     private boolean toQuery;
     private String desc_tipotramite;
+    private Integer beneficio_otorgado;
+
+    public Integer getBeneficio_otorgado() {
+        return beneficio_otorgado;
+    }
+
+    public void setBeneficio_otorgado(Integer beneficio_otorgado) {
+        this.beneficio_otorgado = beneficio_otorgado;
+    }
 
     public String getDesc_tipotramite() {
         return desc_tipotramite;
